@@ -57,19 +57,16 @@ const App = () => {
   useEffect(() => {
     fetch('https://thronesapi.com/api/v2/Characters')
       .then((response) => response.json())
-      .then((characters) => {
+      .then((chars) => {
         fetch('https://game-of-thrones-quotes.herokuapp.com/v1/characters')
           .then((response) => response.json())
-          .then((chars) => {
-            characters = characters.map((character) => {
-              const matchedChar = chars.find((char) => character.fullName === char.name)
+          .then((charQuotes) => {
+            let houses = allowedHouses.map(house => chars.filter(char => char.family === house))
+            houses = houses.map(house => house.map(char => {
+              const matchedChar = charQuotes.find((charQuote) => char.fullName === charQuote.name)
               const quote = matchedChar ? matchedChar.quotes[0] : ''
-              return { ...character, quote }
-            })
-            return characters
-          })
-          .then((characters) => {
-            const houses = allowedHouses.map(house => characters.filter(character => character.family === house))
+              return { ...char, quote }
+            }))
             setHouses(houses)
           })
       })
