@@ -8,8 +8,8 @@ const MemberInfo = ({ imageSrc, nameText, title, quote }) =>
     <Name><Floral src={floralSrc} />{nameText}</Name>
     <Label>Título</Label>
     <Title>{title}</Title>
-    {!!quote && <Label>Citação</Label>}
-    {!!quote && <Quote>{quote}</Quote>}
+    <Label>Citação</Label>
+    <Quote>{quote || 'Sem citação'}</Quote>
   </Wrap>
 
 export default MemberInfo
