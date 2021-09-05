@@ -70,7 +70,6 @@ const App = () => {
           })
           .then((characters) => {
             const houses = allowedHouses.map(house => characters.filter(character => character.family === house))
-            console.log(houses)
             setHouses(houses)
           })
       })
